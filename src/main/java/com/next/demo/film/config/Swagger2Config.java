@@ -18,11 +18,14 @@ public class Swagger2Config {
     //swagger2的配置文件，这里可以配置swagger2的一些基本的内容，比如扫描的包等等
     @Bean
     public Docket createRestApi() {
+        //
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.next.demo.film.example.controller"))
+                //.apis(RequestHandlerSelectors.basePackage("com.next.demo.film.example.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.next.demo.film.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

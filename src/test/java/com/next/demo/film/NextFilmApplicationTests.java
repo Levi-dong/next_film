@@ -107,7 +107,7 @@ public class NextFilmApplicationTests {
         List<NextUser> nextUsers = nextUserMapper.getUsers(iPage);
 
         nextUsers.forEach(System.out::println);
-
+        
     }
 
     @Test

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 4396
 
 rest:
   auth-open: true #如果为true 则开启JWT的验证
@@ -33,3 +33,6 @@ logging:
 
 film:
   img-pre: http//ima.nextfilm.cn/
+
+order:
+  file-path-pre: D:/ChromeCoreDownloads/

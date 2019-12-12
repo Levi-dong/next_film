@@ -53,6 +53,8 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 //登录接口不限制        if (request.getServletPath().equals("/" + jwtProperties.getAuthPath())) {
         if (request.getServletPath().equals("/auth")
+                || request.getServletPath().startsWith("/cinema")
+                || request.getServletPath().startsWith("/film")
                 || request.getServletPath().equals("/user/register")
                 || request.getServletPath().equals("/swagger-ui.html")
                 || request.getServletPath().startsWith("/swagger-resources")

@@ -11,4 +11,5 @@ public class FieldHallInfoVO implements Serializable {
     private String hallName;
     private String price;
     private String seatFile;
+    private String soldSeats;
 }

@@ -37,6 +37,8 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
     @Autowired
     private FilmBrandDictTMapper brandDictMapper;
 
+    @Autowired
+    private FilmOrderTMapper filmOrderTMapper;
 
     @Override
     public Page<CinemaVO> describeCinemaInfo(DescribeCinemaRequestVO describeCinemaRequestVO) {
@@ -68,6 +70,7 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
         return cinemaPage;
     }
 
+    @Override
     public boolean checkCondition(int conditionId,String conditionType){
         //验证conditionId是否有效
         //如果无效，则应该将conditionId=99，并且将conditionId=99的isActive设置为true
@@ -107,9 +110,11 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
         List<BrandResVO> result = brands.stream().map((data)->{
             BrandResVO brandResVO = new BrandResVO();
             if(brandId == data.getUuid()){
-                brandResVO.setActive(true);
+                brandResVO.setIsActive("true");
+            }else{
+                brandResVO.setIsActive("false");
             }
-            brandResVO.setBrandId(brandId+"");
+            brandResVO.setBrandId(data.getUuid()+"");
             brandResVO.setBrandName(data.getShowName());
             return brandResVO;
         }).collect(Collectors.toList());
@@ -125,9 +130,11 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
         List<HallTypeResVO> result = hallTypes.stream().map((data)->{
             HallTypeResVO hallTypeResVO = new HallTypeResVO();
             if(hallTypeId == data.getUuid()){
-                hallTypeResVO.setActive(true);
+                hallTypeResVO.setIsActive("true");
+            }else{
+                hallTypeResVO.setIsActive("false");
             }
-            hallTypeResVO.setHalltypeId(hallTypeId+"");
+            hallTypeResVO.setHalltypeId(data.getUuid()+"");
             hallTypeResVO.setHalltypeName(data.getShowName());
             return hallTypeResVO;
         }).collect(Collectors.toList());
@@ -143,9 +150,11 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
         List<AreaResVO> result = areas.stream().map((data)->{
             AreaResVO areaResVO = new AreaResVO();
             if(areaId == data.getUuid()){
-                areaResVO.setActive(true);
+                areaResVO.setIsActive("true");
+            }else{
+                areaResVO.setIsActive("false");
             }
-            areaResVO.setAreaId(areaId+"");
+            areaResVO.setAreaId(data.getUuid()+"");
             areaResVO.setAreaName(data.getShowName());
             return areaResVO;
         }).collect(Collectors.toList());
@@ -192,6 +201,11 @@ public class CinemaServiceImpl implements CinemaServiceAPI{
     public FieldHallInfoVO describeHallInfoByFieldId(String fieldId) {
         //确认fieldId是否有效
 
-        return filmFieldMapper.describeHallInfo(fieldId);
+        FieldHallInfoVO fieldHallInfoVO = filmFieldMapper.describeHallInfo(fieldId);
+        //调用订单，获取已售座位信息
+        String soldSeats = filmOrderTMapper.describeSoldSeats(fieldId);
+        fieldHallInfoVO.setSoldSeats(soldSeats);
+
+        return fieldHallInfoVO;
     }
 }

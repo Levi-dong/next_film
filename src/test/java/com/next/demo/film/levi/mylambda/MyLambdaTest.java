@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.*;
 import java.util.stream.Stream;
@@ -231,6 +232,12 @@ public class MyLambdaTest {
 
     }
 
-
+    @Test
+    public void yihuoTest() {
+        boolean a = false;
+        boolean b = false;
+        System.out.println(a^b);
+        HashMap map = new HashMap();
+    }
 }
 

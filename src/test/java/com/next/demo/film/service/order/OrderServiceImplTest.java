@@ -54,4 +54,27 @@ public class OrderServiceImplTest {
 
         System.out.println(orderServiceAPI.saveOrder(seatIds, seatNames, fieldId, userId));
     }
+
+    @Test
+    public void describeQRCodeAddress() throws CommonServiceException{
+        String orderId = "415sdf58ew12ds5fe1";
+        System.out.println("qrCode path="+orderServiceAPI.describeQRCodeAddress(orderId));
+    }
+
+    @Test
+    public void describePayResult() throws CommonServiceException{
+        String orderId = "415sdf58ew12ds5fe1";
+        System.out.println("订单支付状态："+orderServiceAPI.describePayResult(orderId));
+    }
+
+    @Test
+    public void orderPaySuccess() throws CommonServiceException{
+        String orderId = "11111";
+        try {
+            orderServiceAPI.orderPaySuccess(orderId);
+        } catch (CommonServiceException e) {
+            log.error("订单回调异常:{}",e);
+        }
+
+    }
 }

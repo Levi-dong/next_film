@@ -56,6 +56,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 || request.getServletPath().startsWith("/cinema")
                 || request.getServletPath().startsWith("/film")
                 || request.getServletPath().equals("/user/register")
+                || request.getServletPath().equals("/order/alipay/callback")
                 || request.getServletPath().equals("/swagger-ui.html")
                 || request.getServletPath().startsWith("/swagger-resources")
                 || request.getServletPath().startsWith("/v2/api-docs")
@@ -66,8 +67,8 @@ public class AuthFilter extends OncePerRequestFilter {
 
         final String requestHeader = request.getHeader(jwtProperties.getHeader());
         String authToken = null;
-        if (requestHeader != null && requestHeader.startsWith("Next ")) {
-            authToken = requestHeader.substring(5);
+        if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
+            authToken = requestHeader.substring(7);
 
             //不规范的注入数据层
             /*String userName = jwtTokenUtil.getUsernameFromToken(authToken);

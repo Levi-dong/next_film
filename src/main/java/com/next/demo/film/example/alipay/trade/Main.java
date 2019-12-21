@@ -92,13 +92,13 @@ public class Main {
         //        main.test_trade_pay(tradeService);
 
         // 测试查询当面付2.0交易
-        //        main.test_trade_query();
+                main.test_trade_query();
 
         // 测试当面付2.0退货
         //        main.test_trade_refund();
 
         // 测试当面付2.0生成支付二维码
-        main.test_trade_precreate();
+       // main.test_trade_precreate();
     }
 
     // 测试系统商交易保障调度
@@ -286,7 +286,7 @@ public class Main {
     // 测试当面付2.0查询订单
     public void test_trade_query() {
         // (必填) 商户订单号，通过此商户订单号查询当面付的交易状态
-        String outTradeNo = "tradepay14817938139942440181";
+        String outTradeNo = "tradeprecreate1576168829183904645";
 
         // 创建查询请求builder，设置请求参数
         AlipayTradeQueryRequestBuilder builder = new AlipayTradeQueryRequestBuilder()
@@ -432,10 +432,10 @@ public class Main {
                 dumpResponse(response);
 
                 // 需要修改为运行机器上的路径
-                String filePath = String.format("/Users/sudo/Desktop/qr-%s.png",
+                String filePath = String.format("D:/ChromeCoreDownloads/nextfilm/qrcode/qr-%s.png",
                     response.getOutTradeNo());
                 log.info("filePath:" + filePath);
-                //                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+                                ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
                 break;
 
             case FAILED:

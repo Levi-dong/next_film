@@ -13,4 +13,8 @@ public class OrderProperties {
 
     private String filePathPre ;
 
+    private String qrcodePathPre;
+
+    private String alipayCallbackPath;
+
 }
